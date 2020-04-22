@@ -1,7 +1,6 @@
 ### Google Data Belfast, Dublin compared
 ### Ciarán O'Kelly
 ### 21 April 2020
----
 
 # libraries and data
 
@@ -12,7 +11,7 @@ library(scales)
 url <- "https://www.gstatic.com/covid19/mobility/Global_Mobility_Report.csv"
 google_data <- read_csv(url)
  
-# write_csv(google_data, "Google_data.csv")
+write_csv(google_data, "Google_data.csv")
 # google_data <- read_csv("Google_data.csv")
 
 

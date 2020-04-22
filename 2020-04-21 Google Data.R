@@ -8,12 +8,15 @@ library(tidyverse)
 library(cowplot)
 library(scales)
 
-url <- "https://www.gstatic.com/covid19/mobility/Global_Mobility_Report.csv"
-google_data <- read_csv(url)
+# Get data
  
-write_csv(google_data, "Google_data.csv")
-# google_data <- read_csv("Google_data.csv")
-
+if(file.exists("Google_data.csv")){
+    google_data <- read_csv("Google_data.csv")
+} else {
+    url <- "https://www.gstatic.com/covid19/mobility/Global_Mobility_Report.csv"
+    google_data <- read_csv(url)
+    write_csv(google_data, "Google_data.csv")
+}
 
 # filter_data
 

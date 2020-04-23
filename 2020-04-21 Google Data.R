@@ -46,7 +46,7 @@ plot1 <- dublin_belfast_london %>%
           axis.text.x = element_text(size = 10, angle = 90, vjust = 0.5)) +
      panel_border(color = "darkgrey") 
 
-save_plot(plot = plot1, filename = "Google Mobility Workplaces Dublin-Belfast.png", base_asp = 3)
+#save_plot(plot = plot1, filename = "Google Mobility Workplaces Dublin-Belfast.png", base_asp = 3)
 
 
 # Pivot the table and then plot retail and grocery data
@@ -76,4 +76,4 @@ plot2 <- dublin_belfast_london2 %>%
           axis.text.x = element_text(size = 10, angle = 90, vjust = 0.5)) +
      panel_border(color = "darkgrey") 
 
-save_plot(plot = plot2, filename = "Google Mobility Retail Recreation Dublin-Belfast.png", base_asp = 3)
+# save_plot(plot = plot2, filename = "Google Mobility Retail Recreation Dublin-Belfast.png", base_asp = 3)

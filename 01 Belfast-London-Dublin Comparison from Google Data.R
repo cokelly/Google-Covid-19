@@ -27,15 +27,26 @@ dublin_belfast_london <- google_data %>%
     rename(Date = date,
            `Workplaces \n (% from baseline)` = workplaces_percent_change_from_baseline,
            City = sub_region_1) %>% 
-    mutate(City = str_remove_all(City, "County |Greater "))
+    mutate(City = str_remove_all(City, "County |Greater ")) 
+
+dublin_belfast_london_workplaces <- dublin_belfast_london %>%  
+    select(country_region_code, country_region, City, Date, `Workplaces \n (% from baseline)`) 
+    
+for_ribbon <- dublin_belfast_london_workplaces %>% 
+    mutate(for_ribbon = ifelse(Date >= "2020-03-09" & Date <= "2020-03-23", `Workplaces \n (% from baseline)`, NA)) %>% 
+    pivot_wider(id_cols = c(City, Date), values_from = for_ribbon, names_from = City)
+
+
+
 
 # Plot of workplace data
 
-plot1 <- dublin_belfast_london %>% 
-    ggplot(., aes(Date, `Workplaces \n (% from baseline)`, colour = City)) +
-    geom_line(size = 1) +
+dublin_belfast_london_workplaces %>% 
+    ggplot(.) +
+    geom_line(aes(Date, `Workplaces \n (% from baseline)`, colour = City), size = 1) +
+    geom_ribbon(data = for_ribbon, aes(x = Date, ymin = Dublin, ymax = Belfast), fill = "grey80", alpha = 0.5) +
     xlab(element_blank()) +
-    ylab("% from baseline") +
+    ylab("% change from baseline") +
     geom_hline(yintercept = 0, alpha = 0.7, colour = "darkgrey", size = 1) +
     labs(title = "Dublin workplace activity started declining before Belfast and London",
          subtitle = "Google Mobility Data: https://www.google.com/covid19/mobility/",
@@ -98,5 +109,5 @@ plot2 <- dublin_belfast_london3 %>%
     panel_border(color = "darkgrey") 
 
 
-save_plot(plot = plot2, filename = "Google Mobility Retail Recreation Dublin-Belfast.png", base_asp = 3)
+#save_plot(plot = plot2, filename = "Google Mobility Retail Recreation Dublin-Belfast.png", base_asp = 3)
 

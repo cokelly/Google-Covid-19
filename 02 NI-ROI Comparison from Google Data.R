@@ -80,9 +80,9 @@ ROI_google <- google_data %>%
 NIROI_google <- bind_rows(NI_google, ROI_google) %>% 
     rename(Date = date,
            `Workplaces \n (% from baseline)` = workplaces_percent_change_from_baseline,
-           Region = sub_region_1,
-           Country = country_region) %>%
-    mutate(Country = str_replace_all(Country, "United Kingdom", "Northern Ireland")) 
+           Region = region,
+           Jurisdiction = country_region) %>%
+    mutate(Jurisdiction = str_replace_all(Jurisdiction, "United Kingdom", "Northern Ireland")) 
 
 # %>% 
 #     group_by(Country, Date) %>%
